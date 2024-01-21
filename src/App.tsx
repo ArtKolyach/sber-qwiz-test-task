@@ -1,12 +1,29 @@
-import React, { FC } from "react";
-import {createRoot} from "react-dom/client";
+import React, { type FC } from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { store } from './app/store'
+import { MainPage } from './pages/Main'
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom'
+import { QuestionsPage } from './pages/QuestionsPage/QuestionsPage'
 
 const App: FC = () => {
-    return (<div>Aboba</div>)
+  return (
+      <Provider store={store}>
+          <BrowserRouter>
+              <Routes>
+                  <Route path='' element={<MainPage/>}/>
+                  <Route path='/questions' element={<QuestionsPage/>}/>
+              </Routes>
+              <MainPage/>
+          </BrowserRouter>
+      </Provider>
+  )
 }
 
 document.body.innerHTML = '<div id="root"></div>'
-const rootElement = document.querySelector("#root") as Element
-const root = createRoot(rootElement);
-
-root.render(<App/>);
+// eslint-disable-next-line react/no-deprecated
+ReactDOM.render(<App />, document.querySelector('#root'))
