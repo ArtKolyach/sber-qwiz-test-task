@@ -1,7 +1,7 @@
 import React, { type FC } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { store } from './app/store'
+import { store } from './store/store'
 import { MainPage } from './pages/Main'
 import {
   HashRouter,
@@ -9,6 +9,7 @@ import {
   Route
 } from 'react-router-dom'
 import { QuestionsPage } from './pages/QuestionsPage/QuestionsPage'
+import { FinalPage } from './pages/FinalPage/FinalPage'
 
 const App: FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: FC = () => {
               <Routes>
                   <Route path='' element={<MainPage/>}/>
                   <Route path='/questions' element={<QuestionsPage/>}/>
+                  <Route path='/final' element={<FinalPage/>}/>
               </Routes>
           </HashRouter>
       </Provider>

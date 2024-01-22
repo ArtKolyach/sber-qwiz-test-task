@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+interface ResultAnswers {
+  chosenAnswer?: string | null
+  correctAnswer: string
+  difficulty: 'easy' | 'medium' | 'hard'
+}
+
 export interface QuestionListState {
   currentQuestion: number
   chosenAnswers: Record<string, ResultAnswers>
@@ -9,11 +15,6 @@ export interface QuestionListState {
 interface ChosenAnswer {
   questionId: number
   answer: ResultAnswers
-}
-
-interface ResultAnswers {
-  chosenAnswer: string
-  correctAnswer: string
 }
 
 const initialState: QuestionListState = {
@@ -34,10 +35,11 @@ export const questionDataSlice = createSlice({
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.currentQuestion += action.payload
     },
-    saveAnswer: (state, { payload: { questionId, answer: { chosenAnswer, correctAnswer } } }: PayloadAction<ChosenAnswer>) => {
+    saveAnswer: (state, { payload: { questionId, answer: { chosenAnswer, correctAnswer, difficulty } } }: PayloadAction<ChosenAnswer>) => {
       state.chosenAnswers[questionId] = {
         chosenAnswer,
-        correctAnswer
+        correctAnswer,
+        difficulty
       }
     }
   }

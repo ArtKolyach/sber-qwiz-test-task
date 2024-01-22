@@ -1,6 +1,6 @@
 import React, { type FC } from 'react'
 import { useNavigate } from 'react-router'
-import { PageWrapper } from '../components/PageWrapper'
+import { PageWrapper } from '../components/PageWapper/PageWrapper'
 
 export const MainPage: FC = () => {
   const navigate = useNavigate()

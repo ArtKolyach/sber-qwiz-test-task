@@ -1,11 +1,11 @@
 import React, { type FC } from 'react'
 import { Answer } from './Answer/Answer'
 import { type QuestionType } from '../../../services/questions/questionsSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { type RootState } from '../../../app/store'
-import { saveAnswer } from '../../../services/questionDataSlice'
 
-interface QuestionComponentProps extends Omit<QuestionType, 'incorrectAnswers' | 'type'> {}
+interface QuestionComponentProps extends Omit<QuestionType, 'incorrectAnswers' | 'correctAnswer' | 'type'> {
+  onChange?: (answer: string) => void
+  chosenAnswer?: string | null
+}
 
 export const Question: FC<QuestionComponentProps> = ({
   id,
@@ -13,19 +13,11 @@ export const Question: FC<QuestionComponentProps> = ({
   difficulty,
   category,
   shuffledAnswers,
-  correctAnswer
+  onChange,
+  chosenAnswer
 }) => {
-  const chosenAnswer = useSelector((state: RootState) => state.questionData.chosenAnswers[id]?.chosenAnswer)
-  const dispatch = useDispatch()
-
   const handleChange = (text: string): void => {
-    dispatch(saveAnswer({
-      questionId: id,
-      answer: {
-        chosenAnswer: text,
-        correctAnswer
-      }
-    }))
+    onChange?.(text)
   }
 
   return (

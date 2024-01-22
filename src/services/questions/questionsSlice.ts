@@ -8,7 +8,7 @@ export interface RawQuestionsResponse {
 
 export interface QuestionResponseType {
   type: string
-  difficulty: string
+  difficulty: 'easy' | 'medium' | 'hard'
   category: string
   question: string
   correct_answer: string
