@@ -1,18 +1,21 @@
 import React, { type FC } from 'react'
 import { useNavigate } from 'react-router'
+import { PageWrapper } from '../components/PageWrapper'
 
 export const MainPage: FC = () => {
   const navigate = useNavigate()
 
   const handleStartButtonClick = (): void => {
-    navigate('../questions')
+    navigate('questions')
   }
 
   return (
-        <button
-            onClick={handleStartButtonClick}
-        >
-          Старт
-        </button>
+      <PageWrapper>
+          <button
+              onClick={handleStartButtonClick}
+          >
+              Старт
+          </button>
+      </PageWrapper>
   )
 }

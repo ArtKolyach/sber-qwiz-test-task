@@ -1,39 +1,48 @@
 import React, { type FC } from 'react'
-import { Answer } from './Answer'
+import { Answer } from './Answer/Answer'
+import { type QuestionType } from '../../../services/questions/questionsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { type RootState } from '../../../app/store'
+import { saveAnswer } from '../../../services/questionDataSlice'
 
-export interface RawQuestions {
-  response_code: number
-  results: QuestionType[]
-}
-export interface QuestionType {
-  type: string
-  difficulty: string
-  category: string
-  question: string
-  correct_answer: string
-  incorrect_answers: string[]
-}
+interface QuestionComponentProps extends Omit<QuestionType, 'incorrectAnswers' | 'type'> {}
 
-export const Question: FC<QuestionType> = ({
+export const Question: FC<QuestionComponentProps> = ({
+  id,
+  question,
   difficulty,
   category,
-  question,
-  correct_answer,
-  incorrect_answers
+  shuffledAnswers,
+  correctAnswer
 }) => {
-  const allAnswers: string[] = [...incorrect_answers, correct_answer]
+  const chosenAnswer = useSelector((state: RootState) => state.questionData.chosenAnswers[id]?.chosenAnswer)
+  const dispatch = useDispatch()
 
-  const shuffledAnswers: string[] = allAnswers
-    .map(value => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value)
+  const handleChange = (text: string): void => {
+    dispatch(saveAnswer({
+      questionId: id,
+      answer: {
+        chosenAnswer: text,
+        correctAnswer
+      }
+    }))
+  }
 
   return (
         <div>
             <h1>{question}</h1>
             <h2>{`${category} | ${difficulty}`}</h2>
           <ul>
-            {shuffledAnswers.map(answer => <Answer key={answer} question={question}>{answer}</Answer>)}
+            {shuffledAnswers.map((answer, index) =>
+                <Answer
+                    key={answer}
+                    questionText={question}
+                    text={answer}
+                    onChange={handleChange}
+                    checked={chosenAnswer === answer}
+                >
+                    {answer}
+                </Answer>)}
           </ul>
         </div>
   )
