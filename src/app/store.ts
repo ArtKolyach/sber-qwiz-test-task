@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { reducer as questionsReducer, reducerPath, middleware } from '../services/questions/questionsSlice'
+import questionDataReducer from '../services/questionDataSlice'
 
 const reducers = {
-  [reducerPath]: questionsReducer
+  [reducerPath]: questionsReducer,
+  questionData: questionDataReducer
 }
 
 const reducer = combineReducers(reducers)

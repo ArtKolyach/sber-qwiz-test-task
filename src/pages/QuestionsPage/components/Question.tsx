@@ -1,4 +1,5 @@
 import React, { type FC } from 'react'
+import { Answer } from './Answer'
 
 export interface RawQuestions {
   response_code: number
@@ -32,7 +33,7 @@ export const Question: FC<QuestionType> = ({
             <h1>{question}</h1>
             <h2>{`${category} | ${difficulty}`}</h2>
           <ul>
-            {shuffledAnswers.map(answer => <li key={answer}>{answer}</li>)}
+            {shuffledAnswers.map(answer => <Answer key={answer} question={question}>{answer}</Answer>)}
           </ul>
         </div>
   )
