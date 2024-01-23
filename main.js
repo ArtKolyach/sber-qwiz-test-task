@@ -46824,10 +46824,9 @@ const WindowWrapper = styled_components_1.default.div `
       border: 1px solid blue;
       display: flex;
       flex-direction: column;
-    @media (max-width: 500px) {
+    @media (max-width: 700px) {
       min-width: 200px;
       width: 95%;
-      height: 95%;
   }
     `;
 const WindowTitle = styled_components_1.default.div `
@@ -46853,6 +46852,27 @@ const Window = ({ children, }) => {
         react_1.default.createElement(WindowBody, null, children)));
 };
 exports.Window = Window;
+
+
+/***/ }),
+
+/***/ "./src/pages/FinalPage/FinalPage.styles.ts":
+/*!*************************************************!*\
+  !*** ./src/pages/FinalPage/FinalPage.styles.ts ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StatTitle = void 0;
+const styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+exports.StatTitle = styled_components_1.default.p `
+  font-weight: bold;
+  `;
 
 
 /***/ }),
@@ -46896,6 +46916,7 @@ const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/rea
 const react_router_1 = __webpack_require__(/*! react-router */ "./node_modules/react-router/dist/index.js");
 const questionsSlice_1 = __webpack_require__(/*! ../../services/questions/questionsSlice */ "./src/services/questions/questionsSlice.ts");
 const QuestionsPage_1 = __webpack_require__(/*! ../QuestionsPage/QuestionsPage */ "./src/pages/QuestionsPage/QuestionsPage.tsx");
+const FinalPage_styles_1 = __webpack_require__(/*! ./FinalPage.styles */ "./src/pages/FinalPage/FinalPage.styles.ts");
 const FinalPage = () => {
     const chosenAnswers = (0, react_redux_1.useSelector)((state) => state.questionData.chosenAnswers);
     const { data, isLoading, } = (0, questionsSlice_1.useGetAllQuestionsQuery)(QuestionsPage_1.QUESTIONS_AMOUNT);
@@ -46932,21 +46953,24 @@ const FinalPage = () => {
     }, [chosenAnswers,]);
     return (react_1.default.createElement(PageWrapper_1.PageWrapper, null,
         allQuestions !== undefined && (react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("p", null,
-                "Correct easy questions: ",
-                answersStats.easy,
-                "/",
-                allQuestions.easy),
-            react_1.default.createElement("p", null,
-                "Correct medium questions: ",
-                answersStats.medium,
-                "/",
-                allQuestions.medium),
-            react_1.default.createElement("p", null,
-                "Correct hard questions: ",
-                answersStats.hard,
-                "/",
-                allQuestions.hard))),
+            allQuestions.easy !== 0 &&
+                (react_1.default.createElement(FinalPage_styles_1.StatTitle, null,
+                    "Correct easy questions: ",
+                    answersStats.easy,
+                    "/",
+                    allQuestions.easy)),
+            allQuestions.medium !== 0 &&
+                (react_1.default.createElement(FinalPage_styles_1.StatTitle, null,
+                    "Correct medium questions: ",
+                    answersStats.medium,
+                    "/",
+                    allQuestions.medium)),
+            allQuestions.hard !== 0 &&
+                (react_1.default.createElement(FinalPage_styles_1.StatTitle, null,
+                    "Correct easy questions: ",
+                    answersStats.hard,
+                    "/",
+                    allQuestions.hard)))),
         react_1.default.createElement("button", { onClick: handleReturnClick }, "\u041D\u0430 \u0433\u043B\u0430\u0432\u043D\u0443\u044E")));
 };
 exports.FinalPage = FinalPage;
@@ -47031,12 +47055,14 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.QuestionWrapper = exports.NavigationButton = exports.ButtonsWrapper = exports.CategoryWrapper = exports.DifficultyWrapper = exports.QuestionSubtitle = exports.QuestionTitle = void 0;
 const styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
 exports.QuestionTitle = styled_components_1.default.h1 `
+  margin: 10px 0;
   `;
 exports.QuestionSubtitle = styled_components_1.default.div `
   display: flex;
   flex-direction: row;
   align-items: center;
   font-weight: bold;
+  margin-bottom: 10px;
   `;
 const colors = {
     easy: '#4caf50',
@@ -47052,6 +47078,7 @@ exports.DifficultyWrapper = styled_components_1.default.p `
 `;
 exports.CategoryWrapper = styled_components_1.default.p `
   margin: 0;
+  font-style: italic;
 `;
 exports.ButtonsWrapper = styled_components_1.default.div `
   display: flex;
@@ -47175,14 +47202,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AnswerRadio = exports.AnswerWrapper = void 0;
+exports.AnswerText = exports.AnswerRadio = exports.AnswerWrapper = void 0;
 const styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
 exports.AnswerWrapper = styled_components_1.default.div `
       display: flex;
   align-items: center;
+  margin-bottom: 5px;
   `;
 exports.AnswerRadio = styled_components_1.default.input `
   margin: 0;
+`;
+exports.AnswerText = styled_components_1.default.p `
+  margin: 0 0 0 10px;
 `;
 
 
@@ -47203,14 +47234,14 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Answer = void 0;
 const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const Answer_styles_1 = __webpack_require__(/*! ./Answer.styles */ "./src/pages/QuestionsPage/components/Answer/Answer.styles.ts");
+const escapeSpecialCharacters_1 = __webpack_require__(/*! ../../../../utils/escapeSpecialCharacters */ "./src/utils/escapeSpecialCharacters.ts");
 const Answer = ({ children, questionText, text, onChange, checked, }) => {
     const handleChange = () => {
         onChange(text);
     };
     return (react_1.default.createElement(Answer_styles_1.AnswerWrapper, null,
-        react_1.default.createElement(Answer_styles_1.AnswerRadio, { type: 'radio', name: questionText, id: text, onChange: handleChange, checked: checked }),
-        react_1.default.createElement("label", null),
-        react_1.default.createElement("p", null, children)));
+        react_1.default.createElement(Answer_styles_1.AnswerRadio, { type: 'radio', name: (0, escapeSpecialCharacters_1.escapeHtml)(questionText), id: text, onChange: handleChange, checked: checked }),
+        react_1.default.createElement(Answer_styles_1.AnswerText, null, children)));
 };
 exports.Answer = Answer;
 
@@ -47233,14 +47264,16 @@ exports.Question = void 0;
 const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const Answer_1 = __webpack_require__(/*! ./Answer/Answer */ "./src/pages/QuestionsPage/components/Answer/Answer.tsx");
 const QuestionsPage_styles_1 = __webpack_require__(/*! ../QuestionsPage.styles */ "./src/pages/QuestionsPage/QuestionsPage.styles.ts");
+const escapeSpecialCharacters_1 = __webpack_require__(/*! ../../../utils/escapeSpecialCharacters */ "./src/utils/escapeSpecialCharacters.ts");
 const Question = ({ id, question, difficulty, category, shuffledAnswers, onChange, chosenAnswer, }) => {
     const handleChange = (text) => {
         onChange?.(text);
     };
+    console.log(question);
     return (react_1.default.createElement(QuestionsPage_styles_1.QuestionWrapper, null,
-        react_1.default.createElement(QuestionsPage_styles_1.QuestionTitle, null, question),
+        react_1.default.createElement(QuestionsPage_styles_1.QuestionTitle, null, (0, escapeSpecialCharacters_1.escapeHtml)(question)),
         react_1.default.createElement(QuestionsPage_styles_1.QuestionSubtitle, null,
-            react_1.default.createElement(QuestionsPage_styles_1.CategoryWrapper, null, category),
+            react_1.default.createElement(QuestionsPage_styles_1.CategoryWrapper, null, (0, escapeSpecialCharacters_1.escapeHtml)(category)),
             react_1.default.createElement(QuestionsPage_styles_1.DifficultyWrapper, { difficulty: difficulty }, difficulty)),
         react_1.default.createElement("div", null, shuffledAnswers.map((answer, index) => react_1.default.createElement(Answer_1.Answer, { key: answer, questionText: question, text: answer, onChange: handleChange, checked: chosenAnswer === answer }, answer)))));
 };
@@ -47407,6 +47440,30 @@ exports.store = (0, toolkit_1.configureStore)({
     reducer,
     middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), questionsSlice_1.middleware,],
 });
+
+
+/***/ }),
+
+/***/ "./src/utils/escapeSpecialCharacters.ts":
+/*!**********************************************!*\
+  !*** ./src/utils/escapeSpecialCharacters.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.escapeHtml = void 0;
+const escapeHtml = (unsafe) => {
+    return unsafe
+        .replaceAll('&amp;', '&')
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll('&quot;', '"')
+        .replaceAll('&#039;', "'")
+        .replaceAll('&eacute;', "e");
+};
+exports.escapeHtml = escapeHtml;
 
 
 /***/ }),
