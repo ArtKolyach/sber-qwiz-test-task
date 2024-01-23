@@ -47139,7 +47139,7 @@ const react_router_1 = __webpack_require__(/*! react-router */ "./node_modules/r
 const QuestionsPage_styles_1 = __webpack_require__(/*! ./QuestionsPage.styles */ "./src/pages/QuestionsPage/QuestionsPage.styles.ts");
 exports.QUESTIONS_AMOUNT = 10;
 const QuestionsPage = () => {
-    const { data, } = (0, questionsSlice_1.useGetAllQuestionsQuery)(exports.QUESTIONS_AMOUNT);
+    const { data, isLoading, } = (0, questionsSlice_1.useGetAllQuestionsQuery)(exports.QUESTIONS_AMOUNT);
     const dispatch = (0, react_redux_1.useDispatch)();
     const navigate = (0, react_router_1.useNavigate)();
     const currQuestionIndex = (0, react_redux_1.useSelector)((state) => state.questionData.currentQuestion);
@@ -47178,12 +47178,14 @@ const QuestionsPage = () => {
     const handleEndClick = () => {
         navigate('../final');
     };
-    return (react_1.default.createElement(PageWrapper_1.PageWrapper, null, currQuestion !== undefined && data !== undefined && (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement(Question_1.Question, { ...currQuestion, onChange: handleAnswerChange, chosenAnswer: chosenAnswer }),
-        react_1.default.createElement(QuestionsPage_styles_1.ButtonsWrapper, null,
-            currQuestionIndex !== 0 && (react_1.default.createElement(QuestionsPage_styles_1.NavigationButton, { onClick: handlePrevClick }, "\u041D\u0430\u0437\u0430\u0434")),
-            currQuestionIndex !== data.length - 1 && (react_1.default.createElement(QuestionsPage_styles_1.NavigationButton, { onClick: handleNextClick }, "\u0414\u0430\u043B\u0435\u0435")),
-            currQuestionIndex === data.length - 1 && (react_1.default.createElement(QuestionsPage_styles_1.NavigationButton, { onClick: handleEndClick }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C")))))));
+    return (react_1.default.createElement(PageWrapper_1.PageWrapper, null, isLoading
+        ? react_1.default.createElement("div", null, "Loading...")
+        : currQuestion !== undefined && data !== undefined && (react_1.default.createElement(react_1.default.Fragment, null,
+            react_1.default.createElement(Question_1.Question, { ...currQuestion, onChange: handleAnswerChange, chosenAnswer: chosenAnswer }),
+            react_1.default.createElement(QuestionsPage_styles_1.ButtonsWrapper, null,
+                currQuestionIndex !== 0 && (react_1.default.createElement(QuestionsPage_styles_1.NavigationButton, { onClick: handlePrevClick }, "\u041D\u0430\u0437\u0430\u0434")),
+                currQuestionIndex !== data.length - 1 && (react_1.default.createElement(QuestionsPage_styles_1.NavigationButton, { onClick: handleNextClick }, "\u0414\u0430\u043B\u0435\u0435")),
+                currQuestionIndex === data.length - 1 && (react_1.default.createElement(QuestionsPage_styles_1.NavigationButton, { onClick: handleEndClick }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C")))))));
 };
 exports.QuestionsPage = QuestionsPage;
 
