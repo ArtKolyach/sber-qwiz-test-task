@@ -14,6 +14,7 @@ export const MainPage: FC = () => {
       <PageWrapper>
         <ButtonWrapper>
           <StartButton
+            data-testid='start-button'
             onClick={handleStartButtonClick}
           >
             Старт

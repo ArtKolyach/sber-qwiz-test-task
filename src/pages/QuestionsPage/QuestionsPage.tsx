@@ -11,7 +11,7 @@ import { NavigationButton, ButtonsWrapper, } from './QuestionsPage.styles'
 export const QUESTIONS_AMOUNT = 10
 
 export const QuestionsPage: FC = () => {
-  const { data, } = useGetAllQuestionsQuery(QUESTIONS_AMOUNT,)
+  const { data, isLoading, } = useGetAllQuestionsQuery(QUESTIONS_AMOUNT,)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -60,7 +60,10 @@ export const QuestionsPage: FC = () => {
 
   return (
         <PageWrapper>
-            {currQuestion !== undefined && data !== undefined && (
+          {
+            isLoading
+              ? <div>Loading...</div>
+              : currQuestion !== undefined && data !== undefined && (
                   <>
                       <Question
                         {...currQuestion}
@@ -85,7 +88,7 @@ export const QuestionsPage: FC = () => {
                       )}
                     </ButtonsWrapper>
                   </>
-            )}
+              )}
         </PageWrapper>
   )
 }

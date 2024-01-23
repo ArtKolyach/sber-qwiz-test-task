@@ -5,6 +5,7 @@ import { type RootState, } from '../../store/store'
 import { useNavigate, } from 'react-router'
 import { useGetAllQuestionsQuery, } from '../../services/questions/questionsSlice'
 import { QUESTIONS_AMOUNT, } from '../QuestionsPage/QuestionsPage'
+import { StatTitle, } from './FinalPage.styles'
 
 export const FinalPage: FC = () => {
   const chosenAnswers = useSelector((state: RootState,) => state.questionData.chosenAnswers,)
@@ -51,9 +52,15 @@ export const FinalPage: FC = () => {
     <PageWrapper>
       { allQuestions !== undefined && (
         <>
-          <p>Correct easy questions: {answersStats.easy}/{allQuestions.easy}</p>
-          <p>Correct medium questions: {answersStats.medium}/{allQuestions.medium}</p>
-          <p>Correct hard questions: {answersStats.hard}/{allQuestions.hard}</p>
+          {allQuestions.easy !== 0 &&
+            (<StatTitle>Correct easy questions: {answersStats.easy}/{allQuestions.easy}</StatTitle>)
+          }
+          {allQuestions.medium !== 0 &&
+            (<StatTitle>Correct medium questions: {answersStats.medium}/{allQuestions.medium}</StatTitle>)
+          }
+          {allQuestions.hard !== 0 &&
+            (<StatTitle>Correct hard questions: {answersStats.hard}/{allQuestions.hard}</StatTitle>)
+          }
         </>
       ) }
       <button onClick={handleReturnClick}>На главную</button>

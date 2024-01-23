@@ -8,6 +8,7 @@ import {
   DifficultyWrapper,
   CategoryWrapper,
 } from '../QuestionsPage.styles'
+import { escapeHtml, } from '../../../utils/escapeSpecialCharacters'
 
 interface QuestionComponentProps extends Omit<QuestionType, 'incorrectAnswers' | 'correctAnswer' | 'type'> {
   onChange?: (answer: string) => void
@@ -27,12 +28,14 @@ export const Question: FC<QuestionComponentProps> = ({
     onChange?.(text,)
   }
 
+  console.log(question,)
+
   return (
         <QuestionWrapper>
-            <QuestionTitle>{question}</QuestionTitle>
+            <QuestionTitle>{escapeHtml(question,)}</QuestionTitle>
           <QuestionSubtitle>
             <CategoryWrapper>
-              {category}
+              {escapeHtml(category)}
             </CategoryWrapper>
             <DifficultyWrapper
               difficulty={difficulty}

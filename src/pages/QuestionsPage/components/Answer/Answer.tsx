@@ -1,5 +1,6 @@
 import React, { type FC, } from 'react'
-import {AnswerRadio, AnswerWrapper,} from './Answer.styles'
+import {AnswerRadio, AnswerText, AnswerWrapper,} from './Answer.styles'
+import {escapeHtml} from "../../../../utils/escapeSpecialCharacters";
 
 interface AnswerType {
   questionText: string
@@ -16,13 +17,12 @@ export const Answer: FC<AnswerType> = ({ children, questionText, text, onChange,
         <AnswerWrapper>
             <AnswerRadio
                 type={'radio'}
-                name={questionText}
+                name={escapeHtml(questionText)}
                 id={text}
                 onChange={handleChange}
                 checked={checked}
             />
-            <label></label>
-            <p>{children}</p>
+            <AnswerText>{children}</AnswerText>
         </AnswerWrapper>
   )
 }

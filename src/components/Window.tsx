@@ -9,10 +9,9 @@ const WindowWrapper = styled.div`
       border: 1px solid blue;
       display: flex;
       flex-direction: column;
-    @media (max-width: 500px) {
+    @media (max-width: 700px) {
       min-width: 200px;
       width: 95%;
-      height: 95%;
   }
     `
 const WindowTitle = styled.div`

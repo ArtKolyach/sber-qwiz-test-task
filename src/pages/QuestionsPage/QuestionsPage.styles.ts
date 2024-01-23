@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const QuestionTitle = styled.h1`
+  margin: 10px 0;
   `
 
 export const QuestionSubtitle = styled.div`
@@ -8,6 +9,7 @@ export const QuestionSubtitle = styled.div`
   flex-direction: row;
   align-items: center;
   font-weight: bold;
+  margin-bottom: 10px;
   `
 
 const colors = {
@@ -26,6 +28,7 @@ export const DifficultyWrapper = styled.p<{ difficulty: 'easy' | 'medium' | 'har
 
 export const CategoryWrapper = styled.p`
   margin: 0;
+  font-style: italic;
 `
 
 export const ButtonsWrapper = styled.div`
