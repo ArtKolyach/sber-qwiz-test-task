@@ -3,11 +3,12 @@ import { PageWrapper, } from '../../components/PageWapper/PageWrapper'
 import { useSelector, } from 'react-redux'
 import { type RootState, } from '../../store/store'
 import { useNavigate, } from 'react-router'
-import {useGetAllQuestionsQuery, useLazyGetAllQuestionsQuery,} from '../../services/questions/questionsSlice'
+import { useGetAllQuestionsQuery, } from '../../services/questions/questionsSlice'
+import { QUESTIONS_AMOUNT, } from '../QuestionsPage/QuestionsPage'
 
 export const FinalPage: FC = () => {
   const chosenAnswers = useSelector((state: RootState,) => state.questionData.chosenAnswers,)
-  const { data, isLoading, } = useGetAllQuestionsQuery(3,)
+  const { data, isLoading, } = useGetAllQuestionsQuery(QUESTIONS_AMOUNT,)
   const navigate = useNavigate()
 
   const allQuestions = useMemo(() => {

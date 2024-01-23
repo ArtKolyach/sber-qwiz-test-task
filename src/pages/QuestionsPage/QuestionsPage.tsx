@@ -6,8 +6,9 @@ import { type RootState, } from '../../store/store'
 import { decrement, increment, saveAnswer as saveAnswerToStore, } from '../../services/questionDataSlice'
 import { PageWrapper, } from '../../components/PageWapper/PageWrapper'
 import { useNavigate, } from 'react-router'
+import { NavigationButton, ButtonsWrapper, } from './QuestionsPage.styles'
 
-const QUESTIONS_AMOUNT = 3
+export const QUESTIONS_AMOUNT = 10
 
 export const QuestionsPage: FC = () => {
   const { data, } = useGetAllQuestionsQuery(QUESTIONS_AMOUNT,)
@@ -66,21 +67,23 @@ export const QuestionsPage: FC = () => {
                         onChange={handleAnswerChange}
                         chosenAnswer={chosenAnswer}
                       />
+                    <ButtonsWrapper>
                       {currQuestionIndex !== 0 && (
-                        <button onClick={handlePrevClick}>
+                        <NavigationButton onClick={handlePrevClick}>
                           Назад
-                        </button>
+                        </NavigationButton>
                       )}
                       {currQuestionIndex !== data.length - 1 && (
-                        <button onClick={handleNextClick}>
+                        <NavigationButton onClick={handleNextClick}>
                           Далее
-                        </button>
+                        </NavigationButton>
                       )}
-                    {currQuestionIndex === data.length - 1 && (
-                      <button onClick={handleEndClick}>
-                        Завершить
-                      </button>
-                    )}
+                      {currQuestionIndex === data.length - 1 && (
+                        <NavigationButton onClick={handleEndClick}>
+                          Завершить
+                        </NavigationButton>
+                      )}
+                    </ButtonsWrapper>
                   </>
             )}
         </PageWrapper>

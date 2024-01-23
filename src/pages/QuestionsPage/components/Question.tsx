@@ -1,6 +1,13 @@
 import React, { type FC, } from 'react'
 import { Answer, } from './Answer/Answer'
 import { type QuestionType, } from '../../../services/questions/questionsSlice'
+import {
+  QuestionTitle,
+  QuestionSubtitle,
+  QuestionWrapper,
+  DifficultyWrapper,
+  CategoryWrapper,
+} from '../QuestionsPage.styles'
 
 interface QuestionComponentProps extends Omit<QuestionType, 'incorrectAnswers' | 'correctAnswer' | 'type'> {
   onChange?: (answer: string) => void
@@ -21,10 +28,19 @@ export const Question: FC<QuestionComponentProps> = ({
   }
 
   return (
-        <div>
-            <h1>{question}</h1>
-            <h2>{`${category} | ${difficulty}`}</h2>
-          <ul>
+        <QuestionWrapper>
+            <QuestionTitle>{question}</QuestionTitle>
+          <QuestionSubtitle>
+            <CategoryWrapper>
+              {category}
+            </CategoryWrapper>
+            <DifficultyWrapper
+              difficulty={difficulty}
+            >
+              {difficulty}
+            </DifficultyWrapper>
+          </QuestionSubtitle>
+          <div>
             {shuffledAnswers.map((answer, index,) =>
                 <Answer
                     key={answer}
@@ -35,7 +51,7 @@ export const Question: FC<QuestionComponentProps> = ({
                 >
                     {answer}
                 </Answer>,)}
-          </ul>
-        </div>
+          </div>
+        </QuestionWrapper>
   )
 }

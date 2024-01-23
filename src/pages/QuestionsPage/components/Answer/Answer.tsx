@@ -1,5 +1,5 @@
 import React, { type FC, } from 'react'
-import { AnswerWrapper, } from './Answer.styles'
+import {AnswerRadio, AnswerWrapper,} from './Answer.styles'
 
 interface AnswerType {
   questionText: string
@@ -14,7 +14,7 @@ export const Answer: FC<AnswerType> = ({ children, questionText, text, onChange,
 
   return (
         <AnswerWrapper>
-            <input
+            <AnswerRadio
                 type={'radio'}
                 name={questionText}
                 id={text}
