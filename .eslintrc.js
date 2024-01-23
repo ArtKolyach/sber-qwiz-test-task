@@ -6,7 +6,7 @@ module.exports = {
   extends: [
     'standard-with-typescript',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
   ],
   overrides: [
     {
@@ -18,8 +18,8 @@ module.exports = {
       ],
       parserOptions: {
         sourceType: 'script'
-      }
-    }
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -30,9 +30,11 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
-    'react'
+    'react',
+    'react-hooks',
   ],
   rules: {
-    "comma-dangle": ["error", "never"]
+    "comma-dangle": ["error", "always"],
+    "@typescript-eslint/comma-dangle": "off",
   }
 }

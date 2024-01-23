@@ -1,6 +1,6 @@
-import React, { type FC } from 'react'
-import { Answer } from './Answer/Answer'
-import { type QuestionType } from '../../../services/questions/questionsSlice'
+import React, { type FC, } from 'react'
+import { Answer, } from './Answer/Answer'
+import { type QuestionType, } from '../../../services/questions/questionsSlice'
 
 interface QuestionComponentProps extends Omit<QuestionType, 'incorrectAnswers' | 'correctAnswer' | 'type'> {
   onChange?: (answer: string) => void
@@ -14,10 +14,10 @@ export const Question: FC<QuestionComponentProps> = ({
   category,
   shuffledAnswers,
   onChange,
-  chosenAnswer
-}) => {
-  const handleChange = (text: string): void => {
-    onChange?.(text)
+  chosenAnswer,
+},) => {
+  const handleChange = (text: string,): void => {
+    onChange?.(text,)
   }
 
   return (
@@ -25,7 +25,7 @@ export const Question: FC<QuestionComponentProps> = ({
             <h1>{question}</h1>
             <h2>{`${category} | ${difficulty}`}</h2>
           <ul>
-            {shuffledAnswers.map((answer, index) =>
+            {shuffledAnswers.map((answer, index,) =>
                 <Answer
                     key={answer}
                     questionText={question}
@@ -34,7 +34,7 @@ export const Question: FC<QuestionComponentProps> = ({
                     checked={chosenAnswer === answer}
                 >
                     {answer}
-                </Answer>)}
+                </Answer>,)}
           </ul>
         </div>
   )
